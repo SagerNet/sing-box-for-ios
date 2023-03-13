@@ -93,13 +93,13 @@ class PlatformInterface: NSObject, LibboxPlatformInterfaceProtocol {
         }
 
         if let tunFd = tunnel.packetFlow.value(forKeyPath: "socket.fileDescriptor") as? Int32 {
-            ret0_.pointee = dup(tunFd)
+            ret0_.pointee = tunFd
             return
         }
 
         let tunFdFromLoop = LibboxGetTunnelFileDescriptor()
         if tunFdFromLoop != -1 {
-            ret0_.pointee = dup(tunFdFromLoop)
+            ret0_.pointee = tunFdFromLoop
         } else {
             throw NSError(domain: "missing file descriptor", code: 0)
         }

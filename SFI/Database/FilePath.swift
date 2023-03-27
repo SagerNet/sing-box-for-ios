@@ -29,7 +29,7 @@ extension URL {
             return nil
         }
         let size = try urls.lazy.reduce(0) {
-            (try $1.resourceValues(forKeys: [.totalFileAllocatedSizeKey]).totalFileAllocatedSize ?? 0) + $0
+            try ($1.resourceValues(forKeys: [.totalFileAllocatedSizeKey]).totalFileAllocatedSize ?? 0) + $0
         }
         let formatter = ByteCountFormatter()
         formatter.countStyle = .file

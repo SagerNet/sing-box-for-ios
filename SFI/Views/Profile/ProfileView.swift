@@ -62,7 +62,7 @@ struct ProfileView: View {
     }
 
     private func doReload() {
-        Task {
+        Task.detached {
             fetchProfiles()
         }
     }
@@ -78,7 +78,7 @@ struct ProfileView: View {
     }
 
     func deleteProfile(_ profile: ConfigProfile) {
-        Task {
+        Task.detached {
             do {
                 _ = try ProfileManager.shared().delete(profile)
                 isLoading = true
@@ -107,7 +107,7 @@ struct ProfileView: View {
             profileList[index]
         }
         profileList.remove(atOffsets: profileIndex)
-        Task {
+        Task.detached {
             do {
                 _ = try ProfileManager.shared().delete(profileToDelete)
             } catch {

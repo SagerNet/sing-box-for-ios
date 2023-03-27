@@ -17,14 +17,14 @@ struct PProfServerSettingsView: View {
         Form {
             if isLoading {
                 ProgressView().onAppear {
-                    Task {
+                    Task.detached {
                         loadSettings()
                     }
                 }
             } else {
                 Toggle("Enabled", isOn: $pprofServerEnabled)
                     .onChange(of: pprofServerEnabled) { newValue in
-                        Task {
+                        Task.detached {
                             SharedPreferences.pprofServerEnabled = newValue
                         }
                     }
@@ -34,7 +34,7 @@ struct PProfServerSettingsView: View {
                     TextField("0 - 65535", value: $pprofServerPort, formatter: formatter)
                         .multilineTextAlignment(.trailing)
                         .onChange(of: pprofServerPort) { newValue in
-                            Task {
+                            Task.detached {
                                 SharedPreferences.pprofServerPort = newValue
                             }
                         }

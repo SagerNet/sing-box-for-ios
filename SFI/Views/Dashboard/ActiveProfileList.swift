@@ -5,13 +5,14 @@ struct ActiveProfileList: View {
     @Binding var currentPage: MainView.Page
     @ObservedObject var profile: VPNProfile
 
-    @State var isLoading: Bool = true
+    @State private var isLoading: Bool = true
 
-    @State var profileList: [ConfigProfile]!
-    @State var selectedProfileID: Int64!
+    @State private var profileList: [ConfigProfile]!
+    @State private var selectedProfileID: Int64!
+    @State private var reasserting = false
 
-    @State var errorPresented: Bool = false
-    @State var errorMessage = ""
+    @State private var errorPresented: Bool = false
+    @State private var errorMessage = ""
 
     var body: some View {
         if isLoading {
@@ -35,19 +36,13 @@ struct ActiveProfileList: View {
                                 }
                             } label: {}
                                 .pickerStyle(.inline)
-                                .onChange(of: selectedProfileID) { newProfileID in
-                                    Task {
-                                        SharedPreferences.selectedProfileID = newProfileID!
-                                        if profile.status.isConnected {
-                                            var error: NSError?
-                                            LibboxClientServiceReload(FilePath.sharedDirectory.relativePath, &error)
-                                            if let error {
-                                                errorMessage = error.localizedDescription
-                                                errorPresented = true
-                                            }
-                                        }
+                                .onChange(of: selectedProfileID) { _ in
+                                    reasserting = true
+                                    Task.detached {
+                                        await switchProfile(selectedProfileID!)
                                     }
-                                }.disabled(!profile.status.isEnabled)
+                                }
+                                .disabled(!profile.status.isSwitchable || reasserting)
                         }
                     }
                 }
@@ -68,8 +63,8 @@ struct ActiveProfileList: View {
     }
 
     private func doReload() {
-        Task {
-            fetchProfiles()
+        Task.detached {
+            await fetchProfiles()
         }
     }
 
@@ -97,5 +92,18 @@ struct ActiveProfileList: View {
                 SharedPreferences.selectedProfileID = selectedProfileID
             }
         }
+    }
+
+    private func switchProfile(_ newProfileID: Int64) {
+        SharedPreferences.selectedProfileID = newProfileID
+        if profile.status.isConnected {
+            var error: NSError?
+            LibboxClientServiceReload(FilePath.sharedDirectory.relativePath, &error)
+            if let error {
+                errorMessage = error.localizedDescription
+                errorPresented = true
+            }
+        }
+        reasserting = false
     }
 }

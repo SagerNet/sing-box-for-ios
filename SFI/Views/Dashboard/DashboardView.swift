@@ -41,7 +41,7 @@ struct DashboardView: View {
     }
 
     private func doReload() {
-        Task {
+        Task.detached {
             await checkProfile()
         }
     }

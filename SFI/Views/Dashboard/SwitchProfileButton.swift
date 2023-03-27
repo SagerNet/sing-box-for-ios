@@ -11,7 +11,7 @@ struct SwitchProfileButton: View {
         Toggle(isOn: Binding(get: {
             profile.status.isConnected
         }, set: { newValue, _ in
-            Task {
+            Task.detached {
                 await switchProfile(newValue)
             }
         })) {
@@ -45,6 +45,15 @@ struct SwitchProfileButton: View {
 extension NEVPNStatus {
     var isEnabled: Bool {
         switch self {
+        case .connected, .disconnected, .reasserting:
+            return true
+        default:
+            return false
+        }
+    }
+
+    var isSwitchable: Bool {
+        switch self {
         case .connected, .disconnected:
             return true
         default:
@@ -54,7 +63,7 @@ extension NEVPNStatus {
 
     var isConnected: Bool {
         switch self {
-        case .connecting, .connected, .disconnecting:
+        case .connecting, .connected, .disconnecting, .reasserting:
             return true
         default:
             return false

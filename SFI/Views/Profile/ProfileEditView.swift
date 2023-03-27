@@ -46,18 +46,20 @@ struct ProfileEditView: View {
             )
         }
         .navigationBarItems(trailing: Button("Save") {
-            Task {
-                saveProfile()
+            Task.detached {
+                await saveProfile()
             }
         }
         .disabled(!isChanged))
     }
 
-    private func saveProfile() {
+    private func saveProfile() async {
         do {
             _ = try ProfileManager.shared().update(profile)
             parentReload = true
-            presentationMode.wrappedValue.dismiss()
+            await MainActor.run {
+                presentationMode.wrappedValue.dismiss()
+            }
         } catch {
             errorMessage = error.localizedDescription
             errorPresented = true

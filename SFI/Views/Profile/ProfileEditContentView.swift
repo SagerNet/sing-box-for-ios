@@ -18,7 +18,7 @@ struct ProfileEditContentView: View {
         viewBuilder {
             if isLoading {
                 ProgressView().onAppear {
-                    Task {
+                    Task.detached {
                         loadContent()
                     }
                 }
@@ -42,8 +42,8 @@ struct ProfileEditContentView: View {
         }
         .navigationBarTitle("Edit")
         .navigationBarItems(trailing: Button("Save") {
-            Task {
-                saveContent()
+            Task.detached {
+                await saveContent()
             }
         }.disabled(!isChanged))
     }
@@ -58,10 +58,12 @@ struct ProfileEditContentView: View {
         isLoading = false
     }
 
-    private func saveContent() {
+    private func saveContent() async {
         do {
             try profileContent.write(toFile: profile.path, atomically: true, encoding: .utf8)
-            presentationMode.wrappedValue.dismiss()
+            await MainActor.run {
+                presentationMode.wrappedValue.dismiss()
+            }
         } catch {
             errorMessage = error.localizedDescription
             errorPresented = true

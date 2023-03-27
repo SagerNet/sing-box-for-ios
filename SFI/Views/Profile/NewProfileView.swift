@@ -33,7 +33,8 @@ struct NewProfileView: View {
                         if !name.isEmpty {
                             checkName = false
                         }
-                    }.focused($nameFocus)
+                    }
+                    .focused($nameFocus)
             }
             Picker(selection: $fileImport) {
                 Text("Create New").tag(false)
@@ -59,12 +60,13 @@ struct NewProfileView: View {
             }
             Section {
                 Button("Create") {
-                    Task {
-                        createProfile()
+                    Task.detached {
+                        await createProfile()
                     }
                 }
             }
-        }.fileImporter(
+        }
+        .fileImporter(
             isPresented: $pickerPresented,
             allowedContentTypes: [.json],
             allowsMultipleSelection: false
@@ -89,7 +91,7 @@ struct NewProfileView: View {
         }
     }
 
-    func createProfile() {
+    private func createProfile() async {
         if name.isEmpty {
             checkName = true
             nameFocus = true
@@ -126,6 +128,8 @@ struct NewProfileView: View {
             return
         }
         isLoading = true
-        presentationMode.wrappedValue.dismiss()
+        await MainActor.run {
+            presentationMode.wrappedValue.dismiss()
+        }
     }
 }

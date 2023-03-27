@@ -33,7 +33,7 @@ struct ExtensionStatusView: View {
     private func doReload() {
         isLoading = false
         connectTask?.cancel()
-        connectTask = Task {
+        connectTask = Task.detached {
             await connect()
         }
     }
@@ -102,7 +102,7 @@ struct StatusContentView: View {
                 LineView(name: "Goroutines", value: "\(message.goroutines)")
                 LineView(name: "Connections", value: "\(message.connections)").contextMenu {
                     Button("Close", role: .destructive) {
-                        Task {
+                        Task.detached {
                             closeConnections()
                         }
                     }
@@ -114,7 +114,7 @@ struct StatusContentView: View {
             }
             #if DEBUG
                 Button("Stop Service", role: .destructive) {
-                    Task {
+                    Task.detached {
                         stopService()
                     }
                 }

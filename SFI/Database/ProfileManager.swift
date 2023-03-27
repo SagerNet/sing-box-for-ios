@@ -31,7 +31,7 @@ class ProfileManager {
 
     func nextOrder() throws -> UInt32 {
         try database.read { db in
-            UInt32(try ConfigProfile.fetchCount(db))
+            try UInt32(ConfigProfile.fetchCount(db))
         }
     }
 

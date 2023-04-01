@@ -50,7 +50,7 @@ struct ProfileEditContentView: View {
 
     private func loadContent() {
         do {
-            profileContent = try String(contentsOfFile: profile.path)
+            profileContent = try profile.readContent()
         } catch {
             errorMessage = error.localizedDescription
             errorPresented = true
@@ -60,7 +60,7 @@ struct ProfileEditContentView: View {
 
     private func saveContent() async {
         do {
-            try profileContent.write(toFile: profile.path, atomically: true, encoding: .utf8)
+            try profile.saveContent(profileContent)
             await MainActor.run {
                 presentationMode.wrappedValue.dismiss()
             }

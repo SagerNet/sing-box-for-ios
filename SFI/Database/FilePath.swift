@@ -11,6 +11,8 @@ class FilePath {
         .appendingPathComponent("Caches", isDirectory: true)
 
     static let workingDirectory = cacheDirectory.appendingPathComponent("Working", isDirectory: true)
+
+    static let iCloudDirectory = FileManager.default.url(forUbiquityContainerIdentifier: nil)!.appendingPathComponent("Documents", isDirectory: true)
 }
 
 extension URL {

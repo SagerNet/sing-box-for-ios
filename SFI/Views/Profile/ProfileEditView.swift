@@ -1,4 +1,5 @@
 import Foundation
+import Libbox
 import SwiftUI
 
 struct ProfileEditView: View {
@@ -8,12 +9,21 @@ struct ProfileEditView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     @State private var isLoading = true
-    @State private var checkName: Bool = false
-    @FocusState private var nameFocus: Bool
-    @State private var isChanged: Bool = false
 
-    @State private var errorPresented: Bool = false
+    @State private var checkName = false
+    @FocusState private var nameFocus: Bool
+
+    @State var checkPath = false
+    @FocusState var pathFocus: Bool
+
+    @State private var isChanged = false
+
+    @State private var errorPresented = false
     @State private var errorMessage = ""
+
+    @State private var checkPresented = false
+    @State private var checkTitle = ""
+    @State private var checkMessage = ""
 
     var body: some View {
         Form {
@@ -32,11 +42,54 @@ struct ProfileEditView: View {
                         isChanged = true
                     }
             }
-            NavigationLink(destination: {
-                ProfileEditContentView(profile: profile)
-            }, label: {
-                Text("Edit Content")
-            })
+            Picker(selection: $profile.type) {
+                Text("Local").tag(ConfigProfile.ProfileType.local)
+                Text("iCloud").tag(ConfigProfile.ProfileType.icloud)
+//                Text("Remote").tag(ConfigProfile.ProfileType.remote)
+            } label: {
+                Text("Type").bold()
+            }
+            .disabled(true)
+            if profile.type == .icloud {
+                HStack {
+                    if checkPath {
+                        Text("Path").bold().foregroundColor(.red)
+                    } else {
+                        Text("Path").bold()
+                    }
+                    Spacer()
+                    Spacer()
+                    TextField("Required", text: $profile.path)
+                        .multilineTextAlignment(.trailing)
+                        .onSubmit {
+                            if !profile.path.isEmpty {
+                                checkPath = false
+                            }
+                        }
+                        .focused($pathFocus)
+                }
+            }
+            Section {
+                if profile.type == .local {
+                    NavigationLink(destination: {
+                        ProfileEditContentView(profile: profile)
+                    }, label: {
+                        Text("Edit Content").foregroundColor(.accentColor)
+                    })
+                }
+                Button("Check") {
+                    Task.detached {
+                        await checkProfile()
+                    }
+                }
+                .alert(isPresented: $checkPresented) {
+                    Alert(
+                        title: Text(checkTitle),
+                        message: Text(checkMessage),
+                        dismissButton: .default(Text("Ok"))
+                    )
+                }
+            }
         }
         .alert(isPresented: $errorPresented) {
             Alert(
@@ -60,6 +113,25 @@ struct ProfileEditView: View {
             await MainActor.run {
                 presentationMode.wrappedValue.dismiss()
             }
+        } catch {
+            errorMessage = error.localizedDescription
+            errorPresented = true
+        }
+    }
+
+    private func checkProfile() async {
+        do {
+            let profileContent = try profile.readContent()
+            var error: NSError?
+            LibboxCheckConfig(profileContent, &error)
+            if let error {
+                checkTitle = "Failed"
+                checkMessage = error.localizedDescription
+            } else {
+                checkTitle = "Success"
+                checkMessage = ""
+            }
+            checkPresented = true
         } catch {
             errorMessage = error.localizedDescription
             errorPresented = true

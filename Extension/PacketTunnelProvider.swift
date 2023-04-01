@@ -60,7 +60,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         let configContent: String
         do {
-            configContent = try String(contentsOfFile: profile.path)
+            configContent = try profile.readContent()
         } catch {
             commandServer.writeMessage("(packet-tunnel) error: read config file: \(error.localizedDescription)")
             return

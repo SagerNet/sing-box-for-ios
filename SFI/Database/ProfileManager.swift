@@ -56,7 +56,9 @@ class ProfileManager {
 
     func delete(_ profileList: [ConfigProfile]) throws -> Int {
         try database.write { db in
-            try ConfigProfile.deleteAll(db, keys: profileList.map { ["id": $0.id!] })
+            try ConfigProfile.deleteAll(db, keys: profileList.map {
+                ["id": $0.id!]
+            })
         }
     }
 
@@ -84,16 +86,18 @@ class ProfileManager {
     private var migrator: DatabaseMigrator {
         var migrator = DatabaseMigrator()
 
-        #if DEBUG
-            migrator.eraseDatabaseOnSchemaChange = true
-        #endif
-
         migrator.registerMigration("createProfile") { db in
             try db.create(table: "profiles") { t in
                 t.autoIncrementedPrimaryKey("id")
                 t.column("name", .text).notNull()
                 t.column("order", .integer).notNull()
                 t.column("path", .text).notNull()
+            }
+        }
+
+        migrator.registerMigration("addProfileType") { db in
+            try db.alter(table: "profiles") { t in
+                t.add(column: "type", .integer).notNull().defaults(to: ConfigProfile.ProfileType.local.rawValue)
             }
         }
 

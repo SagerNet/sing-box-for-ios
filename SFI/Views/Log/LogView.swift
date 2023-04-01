@@ -2,7 +2,7 @@ import Libbox
 import SwiftUI
 
 struct LogView: View {
-    @Binding var currentPage: MainView.Page
+    @Environment(\.currentPage) var currentPage
 
     @State private var isLoading: Bool = true
     @State private var isConnected: Bool = false
@@ -38,7 +38,7 @@ struct LogView: View {
                             }
                         }
                     }
-                    .onChange(of: currentPage) { newPage in
+                    .onChange(of: currentPage.wrappedValue) { newPage in
                         if newPage == MainView.Page.logs, !isConnected {
                             doReload()
                         }

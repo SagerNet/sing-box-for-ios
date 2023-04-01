@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct DashboardView: View {
-    @Binding var currentPage: MainView.Page
-
+    @Environment(\.currentPage) var currentPage
     @Environment(\.scenePhase) var scenePhase
 
     @State var isLoading = true
@@ -18,7 +17,7 @@ struct DashboardView: View {
                     if !isInstalled {
                         InstallProfileButton(parentIsLoading: $isLoading)
                     } else {
-                        ActiveProfileList(currentPage: $currentPage, profile: profile)
+                        ActiveProfileList(profile: profile)
                     }
                 }
             }
@@ -30,7 +29,7 @@ struct DashboardView: View {
                 doReload()
             }
         }
-        .onChange(of: currentPage) { newPage in
+        .onChange(of: currentPage.wrappedValue) { newPage in
             if newPage == MainView.Page.profiles {
                 doReload()
             }

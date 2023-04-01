@@ -8,14 +8,15 @@ struct MainView: View {
     }
 
     @State var currentPage: Page = .dashboard
+    @State var togglePresented = false
 
     var body: some View {
         TabView(selection: $currentPage) {
-            DashboardView(currentPage: $currentPage).tag(Page.dashboard).tabItem {
+            DashboardView().tag(Page.dashboard).tabItem {
                 Label("Dashboard", systemImage: "text.and.command.macwindow")
             }
 
-            LogView(currentPage: $currentPage).tag(Page.logs).tabItem {
+            LogView().tag(Page.logs).tabItem {
                 Label("Logs", systemImage: "text.and.command.macwindow")
             }
 
@@ -26,6 +27,21 @@ struct MainView: View {
             SettingsView().tag(Page.settings).tabItem {
                 Label("Settings", systemImage: "gear.circle.fill")
             }
+        }
+        .environment(\.currentPage, $currentPage)
+        .environment(\.togglePresented, $togglePresented)
+        .onOpenURL(perform: openURL)
+    }
+
+    private func openURL(url: URL) {
+        if url.scheme != "sing-box" {
+            return
+        }
+        switch url.host {
+        case "toggle":
+            currentPage = .dashboard
+            togglePresented = true
+        default: break
         }
     }
 }

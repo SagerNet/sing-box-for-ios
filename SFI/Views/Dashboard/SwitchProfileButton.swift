@@ -4,6 +4,8 @@ import SwiftUI
 struct SwitchProfileButton: View {
     @ObservedObject var profile: VPNProfile
 
+    @Environment(\.togglePresented) var togglePresented
+
     @State var errorPresented: Bool = false
     @State var errorMessage = ""
 
@@ -17,13 +19,34 @@ struct SwitchProfileButton: View {
         })) {
             Text("Enabled")
         }
-        .disabled(!profile.status.isEnabled)
+        .disabled(!profile.status.isEnabled || togglePresented.wrappedValue)
+        .onChange(of: togglePresented.wrappedValue) { newValue in
+            if newValue {
+                Task.detached {
+                    await toggleProfile()
+                }
+            }
+        }
+        .onAppear {
+            if togglePresented.wrappedValue {
+                Task.detached {
+                    await toggleProfile()
+                }
+            }
+        }
         .alert(isPresented: $errorPresented) {
             Alert(
                 title: Text("Error"),
                 message: Text(errorMessage),
                 dismissButton: .default(Text("Ok"))
             )
+        }
+    }
+
+    private func toggleProfile() async {
+        await switchProfile(profile.status == .disconnected)
+        await MainActor.run {
+            togglePresented.wrappedValue = false
         }
     }
 

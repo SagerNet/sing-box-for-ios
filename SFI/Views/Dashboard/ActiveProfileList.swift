@@ -2,7 +2,7 @@ import Libbox
 import SwiftUI
 
 struct ActiveProfileList: View {
-    @Binding var currentPage: MainView.Page
+    @Environment(\.currentPage) var currentPage
     @ObservedObject var profile: VPNProfile
 
     @State private var isLoading: Bool = true
@@ -54,7 +54,7 @@ struct ActiveProfileList: View {
                     dismissButton: .default(Text("Ok"))
                 )
             }
-            .onChange(of: currentPage) { newPage in
+            .onChange(of: currentPage.wrappedValue) { newPage in
                 if newPage == MainView.Page.profiles {
                     doReload()
                 }

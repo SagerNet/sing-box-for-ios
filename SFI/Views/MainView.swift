@@ -17,11 +17,11 @@ struct MainView: View {
             }
 
             LogView().tag(Page.logs).tabItem {
-                Label("Logs", systemImage: "text.and.command.macwindow")
+                Label("Logs", systemImage: "doc.text.fill")
             }
 
             ProfileView().tag(Page.profiles).tabItem {
-                Label("Profiles", systemImage: "doc.fill")
+                Label("Profiles", systemImage: "list.bullet.rectangle.fill")
             }
 
             SettingsView().tag(Page.settings).tabItem {
@@ -34,7 +34,7 @@ struct MainView: View {
     }
 
     private func openURL(url: URL) {
-        if url.scheme != "sing-box" {
+        if url.scheme != "sing-boxK" {
             return
         }
         switch url.host {

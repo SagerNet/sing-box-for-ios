@@ -31,7 +31,6 @@ struct ExtensionStatusView: View {
     }
 
     private func doReload() {
-        isLoading = false
         connectTask?.cancel()
         connectTask = Task.detached {
             await connect()
@@ -39,6 +38,9 @@ struct ExtensionStatusView: View {
     }
 
     private func connect() async {
+        defer {
+            isLoading = false
+        }
         let clientOptions = LibboxCommandClientOptions()
         clientOptions.command = LibboxCommandStatus
         clientOptions.statusInterval = Int64(2 * NSEC_PER_SEC)

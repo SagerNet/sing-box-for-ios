@@ -1,6 +1,7 @@
 import Foundation
 
 import GRDB
+import Libbox
 
 class ProfileManager {
     private static var sharedManager: ProfileManager!
@@ -83,6 +84,31 @@ class ProfileManager {
         }
     }
 
+    func updateRemoteProfile(_ profile: ConfigProfile) throws {
+        if profile.type != .remote {
+            return
+        }
+        let httpClient = HTTPClient()
+        defer {
+            httpClient.close()
+        }
+        let remoteContent = try httpClient.getString(profile.remoteURL)
+        var error: NSError?
+        LibboxCheckConfig(remoteContent, &error)
+        if let error {
+            throw error
+        }
+        try profile.saveContent(remoteContent)
+        profile.lastUpdated = Date()
+        try update(profile)
+    }
+
+    func listAutoUpdateEnabled() throws -> [ConfigProfile] {
+        try database.read { db in
+            try ConfigProfile.filter(Column("autoUpdate") == true).order(Column("order").asc).fetchAll(db)
+        }
+    }
+
     private var migrator: DatabaseMigrator {
         var migrator = DatabaseMigrator()
 
@@ -98,6 +124,19 @@ class ProfileManager {
         migrator.registerMigration("addProfileType") { db in
             try db.alter(table: "profiles") { t in
                 t.add(column: "type", .integer).notNull().defaults(to: ConfigProfile.ProfileType.local.rawValue)
+            }
+        }
+
+        migrator.registerMigration("addProfileRemoteURL") { db in
+            try db.alter(table: "profiles") { t in
+                t.add(column: "remoteURL", .text)
+            }
+        }
+
+        migrator.registerMigration("addProfileAutoUpdate") { db in
+            try db.alter(table: "profiles") { t in
+                t.add(column: "autoUpdate", .boolean).notNull().defaults(to: false)
+                t.add(column: "lastUpdated", .datetime)
             }
         }
 

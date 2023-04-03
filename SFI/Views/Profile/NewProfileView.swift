@@ -1,4 +1,5 @@
 import Foundation
+import Libbox
 import SwiftUI
 
 struct NewProfileView: View {
@@ -17,7 +18,7 @@ struct NewProfileView: View {
     @State var checkName = false
     @FocusState var nameFocus: Bool
 
-    @State var filePath = ""
+    @State var remotePath = ""
     @State var checkPath = false
     @FocusState var pathFocus: Bool
 
@@ -48,7 +49,7 @@ struct NewProfileView: View {
             Picker(selection: $type) {
                 Text("Local").tag(ConfigProfile.ProfileType.local)
                 Text("iCloud").tag(ConfigProfile.ProfileType.icloud)
-//                Text("Remote").tag(ConfigProfile.ProfileType.remote)
+                Text("Remote").tag(ConfigProfile.ProfileType.remote)
             } label: {
                 Text("Type").bold()
             }
@@ -100,10 +101,28 @@ struct NewProfileView: View {
                     }
                     Spacer()
                     Spacer()
-                    TextField("Required", text: $filePath)
+                    TextField("Required", text: $remotePath)
                         .multilineTextAlignment(.trailing)
                         .onSubmit {
-                            if !filePath.isEmpty {
+                            if !remotePath.isEmpty {
+                                checkPath = false
+                            }
+                        }
+                        .focused($pathFocus)
+                }
+            } else if type == .remote {
+                HStack {
+                    if checkPath {
+                        Text("URL").bold().foregroundColor(.red)
+                    } else {
+                        Text("URL").bold()
+                    }
+                    Spacer()
+                    Spacer()
+                    TextField("Required", text: $remotePath)
+                        .multilineTextAlignment(.trailing)
+                        .onSubmit {
+                            if !remotePath.isEmpty {
                                 checkPath = false
                             }
                         }
@@ -113,8 +132,10 @@ struct NewProfileView: View {
             Section {
                 if !isSaving {
                     Button("Create") {
+                        isSaving = true
                         Task.detached {
                             await createProfile()
+                            isSaving = false
                         }
                     }
                 } else {
@@ -122,7 +143,6 @@ struct NewProfileView: View {
                 }
             }
         }
-
         .alert(isPresented: $errorPresented) {
             Alert(
                 title: Text("Error"),
@@ -138,22 +158,19 @@ struct NewProfileView: View {
             nameFocus = true
             return
         }
-        if type == .icloud {
-            if filePath.isEmpty {
+        if type != .local {
+            if remotePath.isEmpty {
                 checkPath = true
                 pathFocus = true
                 return
             }
-        }
-        isSaving = true
-        defer {
-            isSaving = false
         }
         do {
             let profileManager = try ProfileManager.shared()
             let nextProfileID = try profileManager.nextID()
 
             var savePath = ""
+            var remoteURL: String? = nil
 
             if type == .local {
                 let profileConfigDirectory = FilePath.sharedDirectory.appendingPathComponent("configs", isDirectory: true)
@@ -182,7 +199,7 @@ struct NewProfileView: View {
                 if !FileManager.default.fileExists(atPath: FilePath.iCloudDirectory.path) {
                     try FileManager.default.createDirectory(at: FilePath.iCloudDirectory, withIntermediateDirectories: true)
                 }
-                let saveURL = FilePath.iCloudDirectory.appendingPathComponent(filePath, isDirectory: false)
+                let saveURL = FilePath.iCloudDirectory.appendingPathComponent(remotePath, isDirectory: false)
                 saveURL.startAccessingSecurityScopedResource()
                 defer {
                     saveURL.stopAccessingSecurityScopedResource()
@@ -197,9 +214,35 @@ struct NewProfileView: View {
                 if !exists {
                     try "{}".write(to: saveURL, atomically: true, encoding: .utf8)
                 }
-                savePath = filePath
+                savePath = remotePath
+            } else if type == .remote {
+                let httpClient = HTTPClient()
+                defer {
+                    httpClient.close()
+                }
+                let remoteContent: String
+                do {
+                    remoteContent = try httpClient.getString(remotePath)
+                } catch {
+                    errorMessage = error.localizedDescription
+                    errorPresented = true
+                    return
+                }
+                var error: NSError?
+                LibboxCheckConfig(remoteContent, &error)
+                if let error {
+                    errorMessage = error.localizedDescription
+                    errorPresented = true
+                    return
+                }
+                let profileConfigDirectory = FilePath.sharedDirectory.appendingPathComponent("configs", isDirectory: true)
+                try FileManager.default.createDirectory(at: profileConfigDirectory, withIntermediateDirectories: true)
+                let profileConfig = profileConfigDirectory.appendingPathComponent("config_\(nextProfileID).json")
+                try remoteContent.write(to: profileConfig, atomically: true, encoding: .utf8)
+                savePath = profileConfig.relativePath
+                remoteURL = remotePath
             }
-            try ProfileManager.shared().create(ConfigProfile(name: name, type: type, path: savePath))
+            try ProfileManager.shared().create(ConfigProfile(name: name, type: type, path: savePath, remoteURL: remoteURL))
             isLoading = true
             await MainActor.run {
                 presentationMode.wrappedValue.dismiss()

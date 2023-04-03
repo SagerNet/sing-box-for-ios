@@ -36,18 +36,24 @@
 		3A47EAC029A7798B003D221F /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EABF29A7798B003D221F /* NewProfileView.swift */; };
 		3A9FBAD629AB5EC8006AD133 /* PlatformInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68416FAD4BEC4A16A58D6784 /* PlatformInterface.swift */; };
 		3ACF723529A6060200957E6E /* Libbox.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF723429A6060200957E6E /* Libbox.xcframework */; settings = {ATTRIBUTES = (Required, ); }; };
+		3AF2032B29DA66A800FEE991 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841610ACE896CDA298FA38E /* HTTPClient.swift */; };
+		3AF2032C29DA66D700FEE991 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841606C2DB3A9E6D9F9C43C /* Bundle+Extension.swift */; };
 		3AF89ADA29A1C4CB0047F5FD /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF89AD929A1C4CB0047F5FD /* Application.swift */; };
 		3AF89ADE29A1C4CC0047F5FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AF89ADD29A1C4CC0047F5FD /* Assets.xcassets */; };
 		3AF89AE129A1C4CC0047F5FD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AF89AE029A1C4CC0047F5FD /* Preview Assets.xcassets */; };
 		3AFCB72629A85507008C2042 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCB72529A85507008C2042 /* ProfileView.swift */; };
 		6841602146C6A5B45198F95A /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68416E9D1C9483A8591CF760 /* ProfileEditView.swift */; };
+		6841602C2FD8C49CA78AECD6 /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841684E569B66CC08F42D45 /* Binding+Extension.swift */; };
+		6841607661E51C24130B1E34 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841615EC4ED0C3A37D45774 /* BackgroundTask.swift */; };
 		68416184ADAED41A936F610B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68416DD3F4EE4A111BCCC7FF /* SettingsView.swift */; };
 		684161FCA3661503513CD1E0 /* ExtensionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68416511062058BD45098233 /* ExtensionStatusView.swift */; };
 		6841622D4AFB3464370EA97A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841642344A9CEC9CB100E73 /* Extension.swift */; };
+		684164CDF4D3DC2F0EF57CF9 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841606C2DB3A9E6D9F9C43C /* Bundle+Extension.swift */; };
 		684165621AA0A23CDE9BD5F3 /* Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841661B7C81F1D9AB0F1BDA /* Toggle.swift */; };
 		684166DB9A2FF6D5844C0E85 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841602970895E036F9B2957 /* SharedPreferences.swift */; };
 		684167B53A9BBCC780F98237 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841607C27E32589B0015EE7 /* Extension.swift */; };
 		6841686E56360EBE58C4048D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684167649B17EBA6AB2C537F /* MainView.swift */; };
+		684168F14E383C4A86C2DBBF /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841610ACE896CDA298FA38E /* HTTPClient.swift */; };
 		6841696ECA61DC2B92ABE715 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68416DDA2F27E4423C63BA90 /* LogView.swift */; };
 		68416A49F2A0E444CDC954AE /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841635ADCADF9B7D76FDB62 /* LineView.swift */; };
 		68416A8D53FBB86BC3D9B5F0 /* PProfServerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684168256B645641DBC81020 /* PProfServerSettingsView.swift */; };
@@ -117,7 +123,10 @@
 		3AF89AED29A1C5420047F5FD /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		3AFCB72529A85507008C2042 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		6841602970895E036F9B2957 /* SharedPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedPreferences.swift; sourceTree = "<group>"; };
+		6841606C2DB3A9E6D9F9C43C /* Bundle+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		6841607C27E32589B0015EE7 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		6841610ACE896CDA298FA38E /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		6841615EC4ED0C3A37D45774 /* BackgroundTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTask.swift; sourceTree = "<group>"; };
 		6841629FD9178EC9FD03E9E5 /* viewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewBuilder.swift; sourceTree = "<group>"; };
 		6841635ADCADF9B7D76FDB62 /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		6841642344A9CEC9CB100E73 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -127,6 +136,7 @@
 		6841661B7C81F1D9AB0F1BDA /* Toggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toggle.swift; sourceTree = "<group>"; };
 		684167649B17EBA6AB2C537F /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		684168256B645641DBC81020 /* PProfServerSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PProfServerSettingsView.swift; sourceTree = "<group>"; };
+		6841684E569B66CC08F42D45 /* Binding+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
 		68416DD3F4EE4A111BCCC7FF /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		68416DDA2F27E4423C63BA90 /* LogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		68416E729CC9B17DEB4267F8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
@@ -327,6 +337,10 @@
 			isa = PBXGroup;
 			children = (
 				3A28726929A64D0900F41E46 /* VPNProfile.swift */,
+				6841610ACE896CDA298FA38E /* HTTPClient.swift */,
+				6841606C2DB3A9E6D9F9C43C /* Bundle+Extension.swift */,
+				6841684E569B66CC08F42D45 /* Binding+Extension.swift */,
+				6841615EC4ED0C3A37D45774 /* BackgroundTask.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -427,7 +441,7 @@
 			);
 			mainGroup = 3AF89ACD29A1C4CB0047F5FD;
 			packageReferences = (
-				3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB" */,
+				3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB.swift" */,
 				3A2B997C29AF521200340D81 /* XCRemoteSwiftPackageReference "Defaults" */,
 			);
 			productRefGroup = 3AF89AD729A1C4CB0047F5FD /* Products */;
@@ -476,8 +490,10 @@
 				3A28726029A64CA400F41E46 /* PacketTunnelProvider.swift in Sources */,
 				3A1D24C629AA47B0005A410A /* SharedPreferences.swift in Sources */,
 				3A1D24C429AA47AB005A410A /* ProfileManager.swift in Sources */,
+				3AF2032C29DA66D700FEE991 /* Bundle+Extension.swift in Sources */,
 				3A1D24C529AA47AD005A410A /* FilePath.swift in Sources */,
 				3A9FBAD629AB5EC8006AD133 /* PlatformInterface.swift in Sources */,
+				3AF2032B29DA66A800FEE991 /* HTTPClient.swift in Sources */,
 				3A1D24C329AA47A8005A410A /* ConfigProfile.swift in Sources */,
 				684167B53A9BBCC780F98237 /* Extension.swift in Sources */,
 				68416D65510C799AEC99218F /* VPNProfile.swift in Sources */,
@@ -520,6 +536,10 @@
 				68416C4D9B85B8B880F85EE0 /* viewBuilder.swift in Sources */,
 				68416A49F2A0E444CDC954AE /* LineView.swift in Sources */,
 				6841622D4AFB3464370EA97A /* Extension.swift in Sources */,
+				684168F14E383C4A86C2DBBF /* HTTPClient.swift in Sources */,
+				684164CDF4D3DC2F0EF57CF9 /* Bundle+Extension.swift in Sources */,
+				6841602C2FD8C49CA78AECD6 /* Binding+Extension.swift in Sources */,
+				6841607661E51C24130B1E34 /* BackgroundTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,7 +899,7 @@
 				minimumVersion = 7.1.0;
 			};
 		};
-		3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB" */ = {
+		3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/groue/GRDB.swift";
 			requirement = {
@@ -892,7 +912,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		3A1D24C729AA47D6005A410A /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB" */;
+			package = 3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB.swift" */;
 			productName = GRDB;
 		};
 		3A2B997D29AF521200340D81 /* Defaults */ = {
@@ -907,7 +927,7 @@
 		};
 		3A47EAB329A76B2E003D221F /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB" */;
+			package = 3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB.swift" */;
 			productName = GRDB;
 		};
 /* End XCSwiftPackageProductDependency section */

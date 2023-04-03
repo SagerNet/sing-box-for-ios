@@ -8,7 +8,7 @@ struct ProfileEditView: View {
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    @State private var isLoading = true
+    @State private var isLoading = false
 
     @State private var checkName = false
     @FocusState private var nameFocus: Bool
@@ -45,7 +45,7 @@ struct ProfileEditView: View {
             Picker(selection: $profile.type) {
                 Text("Local").tag(ConfigProfile.ProfileType.local)
                 Text("iCloud").tag(ConfigProfile.ProfileType.icloud)
-//                Text("Remote").tag(ConfigProfile.ProfileType.remote)
+                Text("Remote").tag(ConfigProfile.ProfileType.remote)
             } label: {
                 Text("Type").bold()
             }
@@ -65,23 +65,68 @@ struct ProfileEditView: View {
                             if !profile.path.isEmpty {
                                 checkPath = false
                             }
+                            isChanged = true
                         }
                         .focused($pathFocus)
                 }
+            } else if profile.type == .remote {
+                HStack {
+                    if checkPath {
+                        Text("URL").bold().foregroundColor(.red)
+                    } else {
+                        Text("URL").bold()
+                    }
+                    Spacer()
+                    Spacer()
+                    TextField("Required", text: ($profile.remoteURL).unwrapped(""))
+                        .multilineTextAlignment(.trailing)
+                        .onSubmit {
+                            if !profile.path.isEmpty {
+                                checkPath = false
+                            }
+                            isChanged = true
+                        }
+                        .focused($pathFocus)
+                }
+                HStack {
+                    Text("Auto Update").bold()
+                    Spacer()
+                    Spacer()
+                    Toggle("", isOn: $profile.autoUpdate)
+                        .onChange(of: profile.autoUpdate) { _ in
+                            isChanged = true
+                        }
+                }
             }
-            Section {
-                if profile.type == .local {
+            if profile.type == .remote {
+                Section("Status") {
+                    LineView(name: "Last Updated", value: formatDate(profile.lastUpdated))
+                }
+            }
+            Section("Action") {
+                if isLoading {
+                    ProgressView()
+                } else if profile.type == .local {
                     NavigationLink(destination: {
                         ProfileEditContentView(profile: profile)
                     }, label: {
                         Text("Edit Content").foregroundColor(.accentColor)
                     })
+                } else if profile.type == .remote {
+                    Button("Update") {
+                        isLoading = true
+                        Task.detached {
+                            await updateProfile()
+                        }
+                    }
+                    .disabled(isChanged)
                 }
                 Button("Check") {
                     Task.detached {
                         await checkProfile()
                     }
                 }
+                .disabled(isLoading)
                 .alert(isPresented: $checkPresented) {
                     Alert(
                         title: Text(checkTitle),
@@ -104,6 +149,15 @@ struct ProfileEditView: View {
             }
         }
         .disabled(!isChanged))
+    }
+
+    private func formatDate(_ date: Date?) -> String {
+        guard let date else {
+            return "unknown"
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.string(from: date)
     }
 
     private func saveProfile() async {
@@ -132,6 +186,19 @@ struct ProfileEditView: View {
                 checkMessage = ""
             }
             checkPresented = true
+        } catch {
+            errorMessage = error.localizedDescription
+            errorPresented = true
+        }
+    }
+
+    private func updateProfile() async {
+        defer {
+            isLoading = false
+        }
+        do {
+            let profileManager = try ProfileManager.shared()
+            try profileManager.updateRemoteProfile(profile)
         } catch {
             errorMessage = error.localizedDescription
             errorPresented = true

@@ -7,7 +7,7 @@ struct ActiveProfileList: View {
 
     @State private var isLoading: Bool = true
 
-    @State private var profileList: [ConfigProfile]!
+    @State private var profileList: [ConfigProfile] = []
     @State private var selectedProfileID: Int64!
     @State private var reasserting = false
 

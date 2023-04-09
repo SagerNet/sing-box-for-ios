@@ -48,6 +48,7 @@
 		68416184ADAED41A936F610B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68416DD3F4EE4A111BCCC7FF /* SettingsView.swift */; };
 		684161FCA3661503513CD1E0 /* ExtensionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68416511062058BD45098233 /* ExtensionStatusView.swift */; };
 		6841622D4AFB3464370EA97A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841642344A9CEC9CB100E73 /* Extension.swift */; };
+		68416398A0582867B924029F /* ServiceLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841651CDD57564832D04662 /* ServiceLogView.swift */; };
 		684164CDF4D3DC2F0EF57CF9 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841606C2DB3A9E6D9F9C43C /* Bundle+Extension.swift */; };
 		684165621AA0A23CDE9BD5F3 /* Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841661B7C81F1D9AB0F1BDA /* Toggle.swift */; };
 		684166DB9A2FF6D5844C0E85 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841602970895E036F9B2957 /* SharedPreferences.swift */; };
@@ -131,6 +132,7 @@
 		6841635ADCADF9B7D76FDB62 /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		6841642344A9CEC9CB100E73 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		68416511062058BD45098233 /* ExtensionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionStatusView.swift; sourceTree = "<group>"; };
+		6841651CDD57564832D04662 /* ServiceLogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLogView.swift; sourceTree = "<group>"; };
 		684165530F4876C4298463B1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		684165BB1C49FB288C2A2F3A /* .swift-version */ = {isa = PBXFileReference; lastKnownFileType = "file.swift-version"; path = ".swift-version"; sourceTree = "<group>"; };
 		6841661B7C81F1D9AB0F1BDA /* Toggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toggle.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 			children = (
 				68416DD3F4EE4A111BCCC7FF /* SettingsView.swift */,
 				684168256B645641DBC81020 /* PProfServerSettingsView.swift */,
+				6841651CDD57564832D04662 /* ServiceLogView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				684164CDF4D3DC2F0EF57CF9 /* Bundle+Extension.swift in Sources */,
 				6841602C2FD8C49CA78AECD6 /* Binding+Extension.swift in Sources */,
 				6841607661E51C24130B1E34 /* BackgroundTask.swift in Sources */,
+				68416398A0582867B924029F /* ServiceLogView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

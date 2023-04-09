@@ -67,6 +67,9 @@ struct SettingsView: View {
                     Section("Core") {
                         LineView(name: "Version", value: version)
                         LineView(name: "Data Size", value: dataSize)
+                        NavigationLink(destination: ServiceLogView()) {
+                            Text("View Service Log")
+                        }
                         Button("Clear Working Directory") {
                             Task.detached {
                                 clearWorkingDirectory()

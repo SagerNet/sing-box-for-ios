@@ -7,6 +7,13 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     var pprofServer: LibboxPProfServer!
 
     override func startTunnel(options _: [String: NSObject]?) async throws {
+        var error: NSError?
+        LibboxRedirectStderr(FilePath.cacheDirectory.appendingPathComponent("stderr.log").relativePath, &error)
+
+        if let error {
+            writeMessage("(packet-tunnel) redirect stderr error: \(error.localizedDescription)")
+        }
+
         if !SharedPreferences.disableMemoryLimit {
             LibboxSetMemoryLimit()
         }
@@ -14,9 +21,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         commandServer = LibboxNewCommandServer(FilePath.sharedDirectory.relativePath, serverInterface(self))
         do {
             try commandServer.start()
-            NSLog("sing-box: log server started")
         } catch {
-            NSLog("sing-box: log server start error: \(error.localizedDescription)")
+            NSLog("(packet-tunnel): log server start error: \(error.localizedDescription)")
             return
         }
         commandServer.writeMessage("(packet-tunnel) log server started")
@@ -27,7 +33,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 do {
                     try pprofServer.start()
                 } catch {
-                    commandServer.writeMessage("(packet-tunnel) error: start pprof server: \(error.localizedDescription)")
+                    writeMessage("(packet-tunnel) error: start pprof server: \(error.localizedDescription)")
                     return
                 }
             }
@@ -36,15 +42,22 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         do {
             try FileManager.default.createDirectory(at: FilePath.workingDirectory, withIntermediateDirectories: true)
         } catch {
-            commandServer.writeMessage("(packet-tunnel) error: create working directory: \(error.localizedDescription)")
+            writeMessage("(packet-tunnel) error: create working directory: \(error.localizedDescription)")
             return
         }
 
         LibboxSetBasePath(FilePath.workingDirectory.relativePath)
         LibboxSetTempPath(FilePath.cacheDirectory.relativePath)
 
-        commandServer.writeMessage("(packet-tunnel) starting service")
         startService()
+    }
+
+    private func writeMessage(_ message: String) {
+        if let commandServer {
+            commandServer.writeMessage(message)
+        } else {
+            NSLog(message)
+        }
     }
 
     private func startService() {
@@ -52,24 +65,24 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         do {
             profile = try ProfileManager.shared().get(profileID: Int64(SharedPreferences.selectedProfileID))
         } catch {
-            commandServer.writeMessage("(packet-tunnel) error: missing default profile: \(error.localizedDescription)")
+            writeMessage("(packet-tunnel) error: missing default profile: \(error.localizedDescription)")
             return
         }
         guard let profile else {
-            commandServer.writeMessage("(packet-tunnel) error: missing default profile")
+            writeMessage("(packet-tunnel) error: missing default profile")
             return
         }
         let configContent: String
         do {
             configContent = try profile.readContent()
         } catch {
-            commandServer.writeMessage("(packet-tunnel) error: read config file: \(error.localizedDescription)")
+            writeMessage("(packet-tunnel) error: read config file: \(error.localizedDescription)")
             return
         }
         var error: NSError?
         let service = LibboxNewService(configContent, PlatformInterface(self, commandServer), &error)
         if let error {
-            commandServer.writeMessage("(packet-tunnel) error: create service: \(error.localizedDescription)")
+            writeMessage("(packet-tunnel) error: create service: \(error.localizedDescription)")
             return
         }
         guard let service else {
@@ -79,7 +92,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         do {
             try service.start()
         } catch {
-            commandServer.writeMessage("(packet-tunnel) error: start service: \(error.localizedDescription)")
+            writeMessage("(packet-tunnel) error: start service: \(error.localizedDescription)")
             return
         }
         boxService = service
@@ -90,14 +103,14 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             do {
                 try service.close()
             } catch {
-                commandServer.writeMessage("(packet-tunnel) error: stop service: \(error.localizedDescription)")
+                writeMessage("(packet-tunnel) error: stop service: \(error.localizedDescription)")
             }
             boxService = nil
         }
     }
 
     private func reloadService() {
-        commandServer.writeMessage("(packet-tunnel) reloading service")
+        writeMessage("(packet-tunnel) reloading service")
         reasserting = true
         defer {
             reasserting = false
@@ -107,13 +120,13 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
 
     override func stopTunnel(with reason: NEProviderStopReason) async {
-        commandServer.writeMessage("(packet-tunnel) stopping, reason: \(reason)")
+        writeMessage("(packet-tunnel) stopping, reason: \(reason)")
         stopService()
         if let server = pprofServer {
             do {
                 try server.close()
             } catch {
-                commandServer.writeMessage("(packet-tunnel) error: stop pprof server: \(error.localizedDescription)")
+                writeMessage("(packet-tunnel) error: stop pprof server: \(error.localizedDescription)")
             }
             pprofServer = nil
         }
@@ -145,7 +158,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
 
         func serviceStop() throws {
             tunnel.stopService()
-            tunnel.commandServer.writeMessage("(packet-tunnel) debug: service stopped")
+            tunnel.writeMessage("(packet-tunnel) debug: service stopped")
         }
     }
 }

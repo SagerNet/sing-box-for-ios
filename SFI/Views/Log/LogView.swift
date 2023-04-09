@@ -9,9 +9,6 @@ struct LogView: View {
     @State private var logList: [String] = []
     @State private var commandClient: LibboxCommandClient!
 
-    @State private var errorPresented: Bool = false
-    @State private var errorMessage = ""
-
     private let logFont = Font.system(.caption, design: .monospaced)
 
     var body: some View {

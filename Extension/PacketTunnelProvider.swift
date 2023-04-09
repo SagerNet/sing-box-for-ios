@@ -41,6 +41,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
 
         LibboxSetBasePath(FilePath.workingDirectory.relativePath)
+        LibboxSetTempPath(FilePath.cacheDirectory.relativePath)
 
         commandServer.writeMessage("(packet-tunnel) starting service")
         startService()

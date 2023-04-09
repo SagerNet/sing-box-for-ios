@@ -30,6 +30,12 @@ struct SettingsView: View {
                             NavigationLink(destination: PProfServerSettingsView()) {
                                 Text("PProf Server")
                             }
+                            Button("Reset Database") {
+                                Task.detached {
+                                    FilePath.destroy()
+                                }
+                            }
+                            .foregroundColor(.red)
                         }
                     #endif
                     Section("Packet Tunnel") {

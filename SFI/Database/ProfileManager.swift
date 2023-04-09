@@ -6,11 +6,19 @@ import Libbox
 class ProfileManager {
     private static var sharedManager: ProfileManager!
 
+    static let databasePath = FilePath.sharedDirectory.appendingPathComponent("profiles.db")
+
     static func shared() throws -> ProfileManager {
         if sharedManager == nil {
-            sharedManager = try ProfileManager(databasePath: FilePath.sharedDirectory.relativePath + "/profiles.db")
+            sharedManager = try ProfileManager(databasePath: databasePath.relativePath)
         }
         return sharedManager
+    }
+
+    static func destroy() {
+        try? sharedManager?.database.close()
+        try? FileManager.default.removeItem(at: databasePath)
+        sharedManager = nil
     }
 
     let database: any DatabaseWriter

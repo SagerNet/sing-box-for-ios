@@ -4,15 +4,19 @@ class FilePath {
     static let packageName = "org.sagernet.sfi"
     static let groupName = "group.\(packageName)"
 
-    static let sharedDirectory: URL! = FileManager().containerURL(forSecurityApplicationGroupIdentifier: groupName)
+    static let sharedDirectory: URL! = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupName)
 
     static let cacheDirectory = sharedDirectory
         .appendingPathComponent("Library", isDirectory: true)
         .appendingPathComponent("Caches", isDirectory: true)
 
     static let workingDirectory = cacheDirectory.appendingPathComponent("Working", isDirectory: true)
-
     static let iCloudDirectory = FileManager.default.url(forUbiquityContainerIdentifier: nil)!.appendingPathComponent("Documents", isDirectory: true)
+
+    static func destroy() {
+        try? FileManager.default.removeItem(at: sharedDirectory.appendingPathComponent("configs", isDirectory: true))
+        ProfileManager.destroy()
+    }
 }
 
 extension URL {

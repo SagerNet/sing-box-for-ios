@@ -46,8 +46,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             return
         }
 
-        LibboxSetBasePath(FilePath.workingDirectory.relativePath)
-        LibboxSetTempPath(FilePath.cacheDirectory.relativePath)
+        LibboxSetup(FilePath.workingDirectory.relativePath, FilePath.cacheDirectory.relativePath, -1, -1)
 
         startService()
     }

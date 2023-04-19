@@ -105,6 +105,10 @@ class PlatformInterface: NSObject, LibboxPlatformInterfaceProtocol {
         }
     }
 
+    func usePlatformAutoDetectControl() -> Bool {
+        true
+    }
+
     func autoDetectControl(_: Int32) throws {}
 
     func findConnectionOwner(_: Int32, sourceAddress _: String?, sourcePort _: Int32, destinationAddress _: String?, destinationPort _: Int32, ret0_ _: UnsafeMutablePointer<Int32>?) throws {
@@ -128,5 +132,21 @@ class PlatformInterface: NSObject, LibboxPlatformInterfaceProtocol {
             return
         }
         commandServer.writeMessage(message)
+    }
+
+    func usePlatformDefaultInterfaceMonitor() -> Bool {
+        false
+    }
+
+    func startDefaultInterfaceMonitor(_: LibboxInterfaceUpdateListenerProtocol?) throws {}
+
+    func closeDefaultInterfaceMonitor(_: LibboxInterfaceUpdateListenerProtocol?) throws {}
+
+    func useGetter() -> Bool {
+        false
+    }
+
+    func getInterfaces() throws -> LibboxNetworkInterfaceIteratorProtocol {
+        throw NSError(domain: "not implemented", code: 0)
     }
 }

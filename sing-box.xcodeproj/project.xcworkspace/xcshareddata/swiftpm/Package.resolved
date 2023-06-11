@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sindresorhus/Defaults",
       "state" : {
-        "revision" : "d71bfd8ffbf944ef08eacbca5fb96d6f69bf7696",
-        "version" : "7.1.0"
+        "revision" : "0f5a23fcbd83eb72f6d405aa85bbfacaffb99b03",
+        "version" : "7.2.0"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/groue/GRDB.swift",
       "state" : {
-        "revision" : "d3862c042446d3025a8a4123b013e1b6d58fc315",
-        "version" : "6.8.0"
+        "revision" : "57aa4c30bfa0fe6a1913f83042937c4fb943e79c",
+        "version" : "6.15.0"
       }
     }
   ],

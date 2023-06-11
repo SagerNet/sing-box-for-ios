@@ -149,4 +149,8 @@ class PlatformInterface: NSObject, LibboxPlatformInterfaceProtocol {
     func getInterfaces() throws -> LibboxNetworkInterfaceIteratorProtocol {
         throw NSError(domain: "not implemented", code: 0)
     }
+
+    func underNetworkExtension() -> Bool {
+        true
+    }
 }

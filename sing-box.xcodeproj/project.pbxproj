@@ -24,9 +24,6 @@
 		3A2B998029AF557E00340D81 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2B997F29AF557E00340D81 /* Defaults */; };
 		3A2FF7AF29D815AA005FA81C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2FF7AE29D815AA005FA81C /* WidgetKit.framework */; };
 		3A2FF7B129D815AA005FA81C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2FF7B029D815AA005FA81C /* SwiftUI.framework */; };
-		3A2FF7B629D815AA005FA81C /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FF7B529D815AA005FA81C /* Widget.swift */; };
-		3A2FF7B929D815AB005FA81C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A2FF7B829D815AB005FA81C /* Assets.xcassets */; };
-		3A2FF7BF29D815AB005FA81C /* Widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3A2FF7AD29D815AA005FA81C /* Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3A2FF7C629D823AD005FA81C /* viewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841629FD9178EC9FD03E9E5 /* viewBuilder.swift */; };
 		3A47EAB429A76B2E003D221F /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 3A47EAB329A76B2E003D221F /* GRDB */; };
 		3A47EAB629A76B50003D221F /* ConfigProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EAB529A76B50003D221F /* ConfigProfile.swift */; };
@@ -50,7 +47,6 @@
 		6841622D4AFB3464370EA97A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841642344A9CEC9CB100E73 /* Extension.swift */; };
 		68416398A0582867B924029F /* ServiceLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841651CDD57564832D04662 /* ServiceLogView.swift */; };
 		684164CDF4D3DC2F0EF57CF9 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841606C2DB3A9E6D9F9C43C /* Bundle+Extension.swift */; };
-		684165621AA0A23CDE9BD5F3 /* Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841661B7C81F1D9AB0F1BDA /* Toggle.swift */; };
 		684166DB9A2FF6D5844C0E85 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841602970895E036F9B2957 /* SharedPreferences.swift */; };
 		684167B53A9BBCC780F98237 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841607C27E32589B0015EE7 /* Extension.swift */; };
 		6841686E56360EBE58C4048D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684167649B17EBA6AB2C537F /* MainView.swift */; };
@@ -71,13 +67,6 @@
 			remoteGlobalIDString = 3A28725B29A64CA400F41E46;
 			remoteInfo = Extension;
 		};
-		3A2FF7BD29D815AB005FA81C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3AF89ACE29A1C4CB0047F5FD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3A2FF7AC29D815AA005FA81C;
-			remoteInfo = WidgetExtension;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,7 +76,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				3A2FF7BF29D815AB005FA81C /* Widget.appex in Embed Foundation Extensions */,
 				3A28726529A64CA400F41E46 /* Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -108,9 +96,6 @@
 		3A2FF7AD29D815AA005FA81C /* Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2FF7AE29D815AA005FA81C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		3A2FF7B029D815AA005FA81C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		3A2FF7B529D815AA005FA81C /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
-		3A2FF7B829D815AB005FA81C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3A2FF7BA29D815AB005FA81C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A47EAB529A76B50003D221F /* ConfigProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ConfigProfile.swift; sourceTree = "<group>"; usesTabs = 0; };
 		3A47EAB729A76B75003D221F /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		3A47EAB929A77185003D221F /* ActiveProfileList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveProfileList.swift; sourceTree = "<group>"; };
@@ -135,7 +120,6 @@
 		6841651CDD57564832D04662 /* ServiceLogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLogView.swift; sourceTree = "<group>"; };
 		684165530F4876C4298463B1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		684165BB1C49FB288C2A2F3A /* .swift-version */ = {isa = PBXFileReference; lastKnownFileType = "file.swift-version"; path = ".swift-version"; sourceTree = "<group>"; };
-		6841661B7C81F1D9AB0F1BDA /* Toggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toggle.swift; sourceTree = "<group>"; };
 		684167649B17EBA6AB2C537F /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		684168256B645641DBC81020 /* PProfServerSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PProfServerSettingsView.swift; sourceTree = "<group>"; };
 		6841684E569B66CC08F42D45 /* Binding+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
@@ -214,23 +198,11 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		3A2FF7B229D815AA005FA81C /* Widget */ = {
-			isa = PBXGroup;
-			children = (
-				3A2FF7B529D815AA005FA81C /* Widget.swift */,
-				3A2FF7B829D815AB005FA81C /* Assets.xcassets */,
-				3A2FF7BA29D815AB005FA81C /* Info.plist */,
-				6841661B7C81F1D9AB0F1BDA /* Toggle.swift */,
-			);
-			path = Widget;
-			sourceTree = "<group>";
-		};
 		3AF89ACD29A1C4CB0047F5FD = {
 			isa = PBXGroup;
 			children = (
 				3AF89AD829A1C4CB0047F5FD /* SFI */,
 				3A28725E29A64CA400F41E46 /* Extension */,
-				3A2FF7B229D815AA005FA81C /* Widget */,
 				3AF89AEC29A1C5420047F5FD /* Frameworks */,
 				3AF89AD729A1C4CB0047F5FD /* Products */,
 				684165530F4876C4298463B1 /* .gitignore */,
@@ -402,7 +374,6 @@
 			);
 			dependencies = (
 				3A28726429A64CA400F41E46 /* PBXTargetDependency */,
-				3A2FF7BE29D815AB005FA81C /* PBXTargetDependency */,
 			);
 			name = "sing-box";
 			packageProductDependencies = (
@@ -444,7 +415,7 @@
 			);
 			mainGroup = 3AF89ACD29A1C4CB0047F5FD;
 			packageReferences = (
-				3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB" */,
 				3A2B997C29AF521200340D81 /* XCRemoteSwiftPackageReference "Defaults" */,
 			);
 			productRefGroup = 3AF89AD729A1C4CB0047F5FD /* Products */;
@@ -470,7 +441,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A2FF7B929D815AB005FA81C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,8 +478,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A2FF7C629D823AD005FA81C /* viewBuilder.swift in Sources */,
-				3A2FF7B629D815AA005FA81C /* Widget.swift in Sources */,
-				684165621AA0A23CDE9BD5F3 /* Toggle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,11 +522,6 @@
 			isa = PBXTargetDependency;
 			target = 3A28725B29A64CA400F41E46 /* Extension */;
 			targetProxy = 3A28726329A64CA400F41E46 /* PBXContainerItemProxy */;
-		};
-		3A2FF7BE29D815AB005FA81C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3A2FF7AC29D815AA005FA81C /* Widget */;
-			targetProxy = 3A2FF7BD29D815AB005FA81C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -728,6 +691,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ld64";
+				"OTHER_LDFLAGS[arch=*]" = "-ld64";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -782,6 +747,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ld64";
+				"OTHER_LDFLAGS[arch=*]" = "-ld64";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -900,15 +867,15 @@
 			repositoryURL = "https://github.com/sindresorhus/Defaults";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.1.0;
+				minimumVersion = 7.2.0;
 			};
 		};
-		3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
+		3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/groue/GRDB.swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 6.8.0;
+				minimumVersion = 6.15.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -916,7 +883,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		3A1D24C729AA47D6005A410A /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB.swift" */;
+			package = 3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB" */;
 			productName = GRDB;
 		};
 		3A2B997D29AF521200340D81 /* Defaults */ = {
@@ -931,7 +898,7 @@
 		};
 		3A47EAB329A76B2E003D221F /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB.swift" */;
+			package = 3A47EAB229A76B2E003D221F /* XCRemoteSwiftPackageReference "GRDB" */;
 			productName = GRDB;
 		};
 /* End XCSwiftPackageProductDependency section */

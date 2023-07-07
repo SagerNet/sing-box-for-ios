@@ -18,7 +18,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             LibboxSetMemoryLimit()
         }
 
-        commandServer = LibboxNewCommandServer(FilePath.sharedDirectory.relativePath, serverInterface(self))
+        commandServer = LibboxNewCommandServer(FilePath.sharedDirectory.relativePath, serverInterface(self), 100)
         do {
             try commandServer.start()
         } catch {

@@ -84,6 +84,9 @@ struct ExtensionStatusView: View {
         func writeStatus(_ message: LibboxStatusMessage?) {
             statusView.message = message
         }
+        
+        func writeGroups(_ message: LibboxOutboundGroupIteratorProtocol?) {
+        }
     }
 }
 
@@ -114,13 +117,6 @@ struct StatusContentView: View {
                 LineView(name: "Goroutines", value: "Loading...")
                 LineView(name: "Connections", value: "Loading...")
             }
-            #if DEBUG
-                Button("Stop Service", role: .destructive) {
-                    Task.detached {
-                        stopService()
-                    }
-                }
-            #endif
         }
         .alert(isPresented: $errorPresented) {
             Alert(
@@ -132,18 +128,9 @@ struct StatusContentView: View {
     }
 
     private func closeConnections() {
-        var error: NSError?
-        LibboxClientCloseConnections(FilePath.sharedDirectory.relativePath, &error)
-        if let error {
-            errorMessage = error.localizedDescription
-            errorPresented = true
-        }
-    }
-
-    private func stopService() {
-        var error: NSError?
-        LibboxClientServiceStop(FilePath.sharedDirectory.relativePath, &error)
-        if let error {
+        do {
+            try  LibboxNewStandaloneCommandClient(FilePath.sharedDirectory.relativePath)?.closeConnections()
+        } catch {
             errorMessage = error.localizedDescription
             errorPresented = true
         }

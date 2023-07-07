@@ -99,5 +99,7 @@ struct LogView: View {
         }
 
         func writeStatus(_: LibboxStatusMessage?) {}
+        
+        func writeGroups(_ message: LibboxOutboundGroupIteratorProtocol?) {}
     }
 }

@@ -97,9 +97,9 @@ struct ActiveProfileList: View {
     private func switchProfile(_ newProfileID: Int64) {
         SharedPreferences.selectedProfileID = newProfileID
         if profile.status.isConnected {
-            var error: NSError?
-            LibboxClientServiceReload(FilePath.sharedDirectory.relativePath, &error)
-            if let error {
+            do {
+               try  LibboxNewStandaloneCommandClient(FilePath.sharedDirectory.relativePath)?.serviceReload()
+            } catch {
                 errorMessage = error.localizedDescription
                 errorPresented = true
             }

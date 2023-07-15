@@ -15,7 +15,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
 
         if !SharedPreferences.disableMemoryLimit {
-            LibboxSetMemoryLimit()
+            LibboxSetMemoryLimit(true)
         }
 
         commandServer = LibboxNewCommandServer(FilePath.sharedDirectory.relativePath, serverInterface(self), 100)

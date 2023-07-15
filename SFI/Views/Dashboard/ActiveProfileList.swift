@@ -98,7 +98,7 @@ struct ActiveProfileList: View {
         SharedPreferences.selectedProfileID = newProfileID
         if profile.status.isConnected {
             do {
-               try  LibboxNewStandaloneCommandClient(FilePath.sharedDirectory.relativePath)?.serviceReload()
+                try LibboxNewStandaloneCommandClient(FilePath.sharedDirectory.relativePath)?.serviceReload()
             } catch {
                 errorMessage = error.localizedDescription
                 errorPresented = true

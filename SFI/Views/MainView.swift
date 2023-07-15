@@ -3,12 +3,16 @@ import NetworkExtension
 import SwiftUI
 
 struct MainView: View {
+    @Environment(\.openURL) var openURL
+
     enum Page {
         case dashboard, logs, profiles, settings
     }
 
     @State var currentPage: Page = .dashboard
     @State var togglePresented = false
+
+    @State var alertPresented = true
 
     var body: some View {
         TabView(selection: $currentPage) {
@@ -28,21 +32,19 @@ struct MainView: View {
                 Label("Settings", systemImage: "gear.circle.fill")
             }
         }
+        .alert(isPresented: $alertPresented) {
+            Alert(
+                title: Text("Deprecated"),
+                message: Text("This app has been deprecated, please migrate to sing-box β"),
+
+                primaryButton: .default(Text("Ok"), action: {
+                    UIApplication.shared.open(URL(string: "http://sing-box.sagernet.org/installation/clients/sfi/")!)
+                }),
+                secondaryButton: .cancel(Text("Cancel"))
+            )
+        }
         .environment(\.currentPage, $currentPage)
         .environment(\.togglePresented, $togglePresented)
-        .onOpenURL(perform: openURL)
-    }
-
-    private func openURL(url: URL) {
-        if url.scheme != "sing-boxK" {
-            return
-        }
-        switch url.host {
-        case "toggle":
-            currentPage = .dashboard
-            togglePresented = true
-        default: break
-        }
     }
 }
 

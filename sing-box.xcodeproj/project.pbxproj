@@ -22,9 +22,6 @@
 		3A28726A29A64D0900F41E46 /* VPNProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A28726929A64D0900F41E46 /* VPNProfile.swift */; };
 		3A2B997E29AF521200340D81 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2B997D29AF521200340D81 /* Defaults */; };
 		3A2B998029AF557E00340D81 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2B997F29AF557E00340D81 /* Defaults */; };
-		3A2FF7AF29D815AA005FA81C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2FF7AE29D815AA005FA81C /* WidgetKit.framework */; };
-		3A2FF7B129D815AA005FA81C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2FF7B029D815AA005FA81C /* SwiftUI.framework */; };
-		3A2FF7C629D823AD005FA81C /* viewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6841629FD9178EC9FD03E9E5 /* viewBuilder.swift */; };
 		3A47EAB429A76B2E003D221F /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 3A47EAB329A76B2E003D221F /* GRDB */; };
 		3A47EAB629A76B50003D221F /* ConfigProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EAB529A76B50003D221F /* ConfigProfile.swift */; };
 		3A47EAB829A76B75003D221F /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47EAB729A76B75003D221F /* ProfileManager.swift */; };
@@ -93,7 +90,6 @@
 		3A28726129A64CA400F41E46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A28726229A64CA400F41E46 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Extension.entitlements; sourceTree = "<group>"; };
 		3A28726929A64D0900F41E46 /* VPNProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNProfile.swift; sourceTree = "<group>"; };
-		3A2FF7AD29D815AA005FA81C /* Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2FF7AE29D815AA005FA81C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		3A2FF7B029D815AA005FA81C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		3A47EAB529A76B50003D221F /* ConfigProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ConfigProfile.swift; sourceTree = "<group>"; usesTabs = 0; };
@@ -140,15 +136,6 @@
 				3A1D24C829AA47D6005A410A /* GRDB in Frameworks */,
 				3A28725D29A64CA400F41E46 /* NetworkExtension.framework in Frameworks */,
 				3A1539C129A70AAF004CDA92 /* Libbox.xcframework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3A2FF7AA29D815AA005FA81C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3A2FF7B129D815AA005FA81C /* SwiftUI.framework in Frameworks */,
-				3A2FF7AF29D815AA005FA81C /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +202,6 @@
 			children = (
 				3AF89AD629A1C4CB0047F5FD /* sing-box.app */,
 				3A28725C29A64CA400F41E46 /* Extension.appex */,
-				3A2FF7AD29D815AA005FA81C /* Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -344,23 +330,6 @@
 			productReference = 3A28725C29A64CA400F41E46 /* Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		3A2FF7AC29D815AA005FA81C /* Widget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3A2FF7C229D815AB005FA81C /* Build configuration list for PBXNativeTarget "Widget" */;
-			buildPhases = (
-				3A2FF7A929D815AA005FA81C /* Sources */,
-				3A2FF7AA29D815AA005FA81C /* Frameworks */,
-				3A2FF7AB29D815AA005FA81C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Widget;
-			productName = WidgetExtension;
-			productReference = 3A2FF7AD29D815AA005FA81C /* Widget.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		3AF89AD529A1C4CB0047F5FD /* sing-box */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3AF89AE429A1C4CC0047F5FD /* Build configuration list for PBXNativeTarget "sing-box" */;
@@ -397,9 +366,6 @@
 					3A28725B29A64CA400F41E46 = {
 						CreatedOnToolsVersion = 14.2;
 					};
-					3A2FF7AC29D815AA005FA81C = {
-						CreatedOnToolsVersion = 14.3;
-					};
 					3AF89AD529A1C4CB0047F5FD = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -424,20 +390,12 @@
 			targets = (
 				3AF89AD529A1C4CB0047F5FD /* sing-box */,
 				3A28725B29A64CA400F41E46 /* Extension */,
-				3A2FF7AC29D815AA005FA81C /* Widget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3A28725A29A64CA400F41E46 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3A2FF7AB29D815AA005FA81C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -470,14 +428,6 @@
 				3A1D24C329AA47A8005A410A /* ConfigProfile.swift in Sources */,
 				684167B53A9BBCC780F98237 /* Extension.swift in Sources */,
 				68416D65510C799AEC99218F /* VPNProfile.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3A2FF7A929D815AA005FA81C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3A2FF7C629D823AD005FA81C /* viewBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,6 +494,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.sagernet.sfi.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -571,63 +522,8 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.sagernet.sfi.extension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		3A2FF7C029D815AB005FA81C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WS7V6UUR9Y;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Widget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Widget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.sagernet.sfi.widget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		3A2FF7C129D815AB005FA81C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WS7V6UUR9Y;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Widget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Widget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.sagernet.sfi.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -780,6 +676,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.sagernet.sfi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -812,6 +709,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.sagernet.sfi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -828,15 +726,6 @@
 			buildConfigurations = (
 				3A28726729A64CA400F41E46 /* Debug */,
 				3A28726829A64CA400F41E46 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3A2FF7C229D815AB005FA81C /* Build configuration list for PBXNativeTarget "Widget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3A2FF7C029D815AB005FA81C /* Debug */,
-				3A2FF7C129D815AB005FA81C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

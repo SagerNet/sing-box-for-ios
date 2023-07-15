@@ -84,9 +84,8 @@ struct ExtensionStatusView: View {
         func writeStatus(_ message: LibboxStatusMessage?) {
             statusView.message = message
         }
-        
-        func writeGroups(_ message: LibboxOutboundGroupIteratorProtocol?) {
-        }
+
+        func writeGroups(_: LibboxOutboundGroupIteratorProtocol?) {}
     }
 }
 
@@ -129,7 +128,7 @@ struct StatusContentView: View {
 
     private func closeConnections() {
         do {
-            try  LibboxNewStandaloneCommandClient(FilePath.sharedDirectory.relativePath)?.closeConnections()
+            try LibboxNewStandaloneCommandClient(FilePath.sharedDirectory.relativePath)?.closeConnections()
         } catch {
             errorMessage = error.localizedDescription
             errorPresented = true

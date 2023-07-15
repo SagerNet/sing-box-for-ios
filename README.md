@@ -2,6 +2,10 @@
 
 Experimental iOS client for sing-box, the universal proxy platform.
 
+## Archived
+
+Replaced by https://github.com/SagerNet/sing-box-for-apple
+
 ## Documentation
 
 https://sing-box.sagernet.org/installation/clients/sfi/
